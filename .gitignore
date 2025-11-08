@@ -1,0 +1,16 @@
+.env
+.gradio/
+.venv/
+src/model/saved/finbert/
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store
+.vscode/
+*.pyc
+*.pyo
+*.pyd
+*.swp
+*.swo
+.idea/
+*.log
+output/
