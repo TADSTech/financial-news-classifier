@@ -14,3 +14,9 @@ __pycache__/
 .idea/
 *.log
 output/
+src/financial_news_classifier.egg-info
+src/__pycache__
+
+
+zipper.py
+zipped_model.zip

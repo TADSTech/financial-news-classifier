@@ -1,1 +1,1 @@
-Note: In order to speed things up, the model is trained on google collab
+Model to be saved at src/model/saved/finbert

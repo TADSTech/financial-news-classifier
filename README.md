@@ -1,56 +1,82 @@
-# 📈 Financial News Classifier
+# Financial News Classifier
 
-A lightweight tool to classify the sentiment of financial news using state-of-the-art NLP models. Supports CLI, GUI, and programmatic access.
+Professional sentiment classification for financial news and market headlines using deep learning.
 
-**Features:**
-- 🎯 Accurate sentiment classification (Positive, Negative, Neutral)
-- 🖥️ Easy-to-use CLI and GUI
-- 📰 RSS feed support for real-time news classification
-- 🚀 Efficient inference with Hugging Face transformers
-- 💾 Model caching for faster reuse
+**Classify sentiment of financial text with:**
+- Clean, professional CLI
+- Beautiful Gradio web interface
+- Batch processing (CSV, JSON, TXT, MD)
+- Real-time RSS feed analysis
+- GPU-accelerated inference
+- Confidence scores for all predictions
 
 ---
 
 ## Requirements
 
-- **Python 3.13+**
+- **Python 3.10+** (tested on 3.10, 3.11, 3.12, 3.13)
 - **pip** package manager
 
 Optional:
-- `tkinter` for GUI (usually included with Python)
-- CUDA-compatible GPU for faster inference (optional)
+- **NVIDIA GPU** for faster inference (CUDA 11.8+)
+- Internet connection for first-time model download (~500MB)
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
+### Installation
 ```bash
-# Install the package
+# Clone repository
+git clone https://github.com/TADSTech/financial-news-classifier.git
+cd financial-news-classifier
+
+# Create virtual environment
+python -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+
+# Install package
 pip install .
+```
 
-# Classify a single sentence
-fnc text "The stock market looks bullish today."
+### Basic Usage
 
-# Launch the GUI
+**Classify single text:**
+```bash
+fnc classify "The stock market looks bullish today."
+```
+
+**Launch web GUI:**
+```bash
 fnc gui
 ```
 
+**Process file:**
+```bash
+fnc batch data.csv --output results.csv
+```
+
+**Analyze RSS feed:**
+```bash
+fnc rss https://feeds.bloomberg.com/markets/news.rss
+```
+
 ---
 
-## 📦 Setup / Installation
+## Installation
 
-### 1. Clone or copy the repository:
+### Step 1: Clone Repository
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/TADSTech/financial-news-classifier.git
 cd financial-news-classifier
 ```
 
-### 2. Create a virtual environment (recommended):
+### Step 2: Create Virtual Environment
 ```bash
 python -m venv .venv
 ```
 
-### 3. Activate the virtual environment:
+### Step 3: Activate Environment
 
 **Linux / macOS:**
 ```bash
@@ -62,137 +88,152 @@ source .venv/bin/activate
 .venv\Scripts\activate
 ```
 
-### 4. Install dependencies:
-
-Option A - Install as a package:
+### Step 4: Install Dependencies
 ```bash
 pip install .
 ```
 
-Option B - Install from requirements:
+Or:
 ```bash
 pip install -r requirements.txt
 ```
 
 ---
 
-## Setup / Installation
+## Usage
 
-1. **Clone or copy the repository:**
-```bash
-git clone <your-repo-url>
-cd financial-news-classifier
-````
+### Command Line Interface
 
-2. **Create a virtual environment** (recommended):
-
-```bash
-python -m venv .venv
-```
-
-3. **Activate the virtual environment:**
-
-* **Linux / macOS:**
-
-```bash
-source .venv/bin/activate
-```
-
-* **Windows:**
-
-```bash
-.venv\Scripts\activate
-```
-
-4. **Install dependencies**:
-
-```bash
-pip install -r requirements.txt
-```
-
-Or, if installing as a package:
-
-```bash
-pip install .
-pip install -r requirements.txt
-```
-
-## 💻 Usage
-
-### Command Line Interface (CLI)
-
+View all commands:
 ```bash
 fnc --help
 ```
 
-#### Examples:
-
-**Classify a single sentence:**
+#### Classify Single Text
 ```bash
-fnc text "The stock market looks bullish today."
+fnc classify "Your text here"
+
+# Show detailed sentiment scores
+fnc classify "Your text here" --detailed
+
+# Use specific device
+fnc classify "Your text here" --device cuda
 ```
 
-**Classify text from a file** (CSV, TXT, or JSON):
+#### Batch Process Files
+Process CSV, JSON, TXT, or MD files:
 ```bash
-fnc file path/to/file.csv
+fnc batch data.csv
+
+# Specify column name
+fnc batch data.csv --column headlines
+
+# Save results
+fnc batch data.csv --output results.csv
+
+# Save as JSON
+fnc batch data.csv --output results.json --format json
 ```
 
-**Fetch and classify RSS headlines:**
+#### Analyze RSS Feeds
+Fetch and classify headlines from RSS feeds:
 ```bash
-fnc rss https://example.com/rss
+fnc rss https://feeds.bloomberg.com/markets/news.rss
+
+# Fetch specific number of headlines
+fnc rss https://example.com/rss --max 50
+
+# Save results
+fnc rss https://example.com/rss --output results.csv
 ```
 
-**Launch GUI:**
+#### Launch GUI
+Open professional web interface:
 ```bash
 fnc gui
 ```
 
-**Show version:**
+Opens at `http://127.0.0.1:7860`
+
+#### Show Information
 ```bash
-fnc --version
+# Version info
+fnc version
+
+# System and model info
+fnc info
 ```
 
-### Graphical User Interface (GUI)
+---
 
-Launch the GUI with:
-```bash
-python -m src.gui
-```
+## GUI Features
 
-Or via CLI:
+Launch the Gradio web interface:
 ```bash
 fnc gui
 ```
 
-The GUI provides:
-- Text input field for single sentence classification
-- File upload for batch processing
-- Result display with confidence scores
-- Export results to CSV
+**Tabs:**
 
-### Python API
+1. **Classification** - Single text analysis
+   - Real-time sentiment detection
+   - Confidence scores
+   - Detailed sentiment breakdown
+   - JSON output
+
+2. **Batch Processing** - Process multiple texts
+   - Upload files (CSV, JSON, TXT, MD)
+   - Auto-detect text columns
+   - Display results as table
+   - Export to CSV
+
+3. **RSS Analysis** - Monitor feed headlines
+   - Enter RSS feed URL
+   - Fetch latest headlines
+   - See publication dates and sources
+   - Export results
+
+4. **About** - Documentation and tips
+   - Feature overview
+   - Sentiment explanations
+   - Usage guidelines
+   - Model information
+
+---
+
+## Python API
+
+Use as a Python library:
 
 ```python
-from src.model.infer import predict
+from core.infer import predict, predict_batch
 
-result = predict("The stock market looks bullish today.")
-print(result)  # {'sentiment': 'positive', 'confidence': 0.95}
+# Single prediction
+result = predict("Stock prices surge 5% on earnings beat")
+print(result)
+# {'sentiment': 'Bullish', 'confidence': 0.95, 'scores': {...}}
+
+# Batch prediction
+texts = ["Text 1", "Text 2", "Text 3"]
+results = predict_batch(texts)
+for result in results:
+    print(f"{result['text']}: {result['sentiment']}")
 ```
 
-## ⚙️ Configuration
+---
+
+## Configuration
 
 ### Environment Variables
 
-Create a `.env` file in the project root:
-
+Create `.env` file (optional):
 ```bash
-# Model configuration
-MODEL_NAME=distilbert-base-uncased-finetuned-sst-2-english
-DEVICE=cpu  # or 'cuda' for GPU
+# Device selection
+DEVICE=auto  # or 'cpu', 'cuda'
 
 # GUI settings
-GUI_THEME=default
 GUI_PORT=7860
+GUI_THEME=default
 
 # Logging
 LOG_LEVEL=INFO
@@ -200,102 +241,129 @@ LOG_LEVEL=INFO
 
 ### Batch Processing
 
-For processing large files or RSS feeds, the classifier will automatically:
-- Cache models locally for faster reuse
-- Process in batches to optimize memory usage
-- Display progress bars
+Large file processing tips:
+- Adjust batch size: `--batch-size 64`
+- Use GPU: `--device cuda`
+- Model is cached locally after first download
 
 ---
 
-## 📊 Model Information
+## Model Details
 
-- **Base Model:** DistilBERT (or configurable via requirements)
-- **Task:** Sentiment Classification
-- **Output Classes:** Positive, Negative, Neutral
-- **Input:** Text (sentences, paragraphs, or documents)
+- **Base:** DistilBERT (transformer-based)
+- **Fine-tuned:** FinancialPhraseBank dataset
+- **Classes:** Bullish, Bearish, Neutral
+- **Max Input:** 512 tokens
+- **Framework:** PyTorch + Transformers
+
+### Local Model Support
+
+For offline use, place model files at:
+```
+src/model/saved/finbert/
+├── config.json
+├── pytorch_model.bin
+├── tokenizer.json
+└── label_encoder.pkl
+```
+
+See `LOCAL_MODEL_SETUP.md` for details.
 
 ---
 
-## 🛠️ Development
+## Performance
 
-### Install in editable mode:
+| Metric | CPU | GPU |
+|--------|-----|-----|
+| Single Prediction | ~500ms | ~100ms |
+| Batch (100 texts) | ~50s | ~5s |
+| Model Size | ~500MB | ~500MB |
+
+GPU times are approximate and depend on hardware.
+
+---
+
+## Troubleshooting
+
+### Model Download Issues
+```bash
+# Set cache directory
+export HF_HOME=~/.cache/huggingface
+```
+
+### CUDA/GPU Not Working
+```bash
+# Install PyTorch CPU-only
+pip install torch --index-url https://download.pytorch.org/whl/cpu
+```
+
+### High Memory Usage
+```bash
+# Reduce batch size
+fnc batch data.csv --batch-size 8
+```
+
+### Gradio/GUI Issues
+```bash
+# Reinstall Gradio
+pip install --upgrade gradio
+```
+
+---
+
+## Development
+
+### Install in Development Mode
 ```bash
 pip install -e .
 ```
 
-### Run tests:
+### Run Tests
 ```bash
 pytest tests/
 ```
 
-### Build the package:
+### Build Package
 ```bash
 python setup.py build
 ```
 
 ---
 
-## 🐛 Troubleshooting
+## Project Structure
 
-### Model Download Issues
-If the first run fails to download models:
-```bash
-# Set Hugging Face home
-export HF_HOME=~/.cache/huggingface
 ```
-
-### CUDA / GPU Issues
-For CPU-only usage, install PyTorch without CUDA:
-```bash
-pip install torch --index-url https://download.pytorch.org/whl/cpu
-```
-
-### Memory Issues
-For large files or low-memory systems:
-```bash
-# Set batch size via environment variable
-export BATCH_SIZE=8
-fnc file large_file.csv
-```
-
-### tkinter Not Found (GUI)
-**Ubuntu/Debian:**
-```bash
-sudo apt-get install python3-tk
-```
-
-**macOS:**
-```bash
-brew install python-tk
+financial-news-classifier/
+├── src/
+│   ├── cli.py              # CLI interface
+│   ├── gui.py              # Gradio web interface
+│   ├── core/
+│   │   ├── infer.py        # Model inference
+│   │   ├── io_utils.py     # File I/O
+│   │   └── rss.py          # RSS processing
+│   ├── model/
+│   │   ├── train.py        # Training pipeline
+│   │   ├── saved/          # Local models
+│   │   └── config.py       # Training config
+│   └── data/
+│       └── prepare.py      # Data preprocessing
+├── requirements.txt        # Dependencies
+├── setup.py               # Package config
+├── README.md              # This file
+└── LICENSE                # MIT License
 ```
 
 ---
 
-## 📝 Notes
+## License
 
-- The first run may download Hugging Face models (~500MB); these are cached locally for future runs
-- All cached models are stored in `~/.cache/huggingface/`
-- Virtual environments are reusable across projects after setup
-- Results include confidence scores for each prediction
-- Batch processing results are exported with timestamps
+MIT License - See [LICENSE](LICENSE)
 
 ---
 
-## 📄 License
+## Support
 
-MIT License - see [LICENSE](LICENSE) for details
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Please:
-1. Fork the repository
-2. Create a feature branch
-3. Submit a pull request
-
----
-
-## 📧 Support
-
-For issues or questions, please open an issue on GitHub or contact the maintainers.
+For issues or questions:
+- Open an issue on [GitHub](https://github.com/TADSTech/financial-news-classifier)
+- Check [DOCUMENTATION_INDEX.md](DOCUMENTATION_INDEX.md) for guides
+- See [LOCAL_MODEL_SETUP.md](LOCAL_MODEL_SETUP.md) for offline model setup
