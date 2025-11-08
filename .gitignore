@@ -25,6 +25,5 @@ zipped_model.zip
 # ===================
 # Nested git repositories for HF Spaces (separate from GitHub)
 hf_space_temp/
-YOUR_SPACE_NAME/
 deployments/hf_spaces/
 deployment/hf_spaces/
