@@ -318,11 +318,6 @@ pip install --upgrade gradio
 pip install -e .
 ```
 
-### Run Tests
-```bash
-pytest tests/
-```
-
 ### Build Package
 ```bash
 python setup.py build
@@ -365,5 +360,4 @@ MIT License - See [LICENSE](LICENSE)
 
 For issues or questions:
 - Open an issue on [GitHub](https://github.com/TADSTech/financial-news-classifier)
-- Check [DOCUMENTATION_INDEX.md](DOCUMENTATION_INDEX.md) for guides
-- See [LOCAL_MODEL_SETUP.md](LOCAL_MODEL_SETUP.md) for offline model setup
+- See [LOCAL_MODEL_SETUP](OFFLINE_MODEL_SETUP_QUICK_GUIDE.md) for offline model setup
