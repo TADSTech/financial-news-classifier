@@ -580,8 +580,8 @@
             <h1>Financial News <span>Sentiment Analysis</span></h1>
             <p>AI-powered classification of financial news to Bullish, Bearish, or Neutral sentiment with enterprise-grade accuracy</p>
             <div class="cta-buttons">
-                <button class="btn btn-primary">Try Live Demo</button>
-                <button class="btn btn-secondary">View Documentation</button>
+                <button id="cta_btn" class="btn btn-primary">Try Live Demo</button>
+                <button id="doc_btn" class="btn btn-secondary">View Documentation</button>
             </div>
         </div>
     </section>
@@ -708,6 +708,10 @@
     <script>
         document.getElementById('cta_btn').addEventListener('click', function() {
             window.location.href = 'https://huggingface.co/spaces/TADSTech/fnc';
+        });
+
+        document.getElementById('doc_btn').addEventListener('click', function() {
+            window.location.href = 'https://github.com/TADSTech/financial-news-classifier?tab=readme-ov-file';
         });
     </script>
 </body>
